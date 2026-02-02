@@ -1,197 +1,98 @@
-// import ProductTab from "./ProductTab.jsx";
-// import Activity from "./Activity.jsx";
-// function App() {
-//   return( 
-//     <div>    
-//       <ProductTab/>
-//       <Activity name="SHAIK MAHAMMAD SAJID" textColor="green" />
-//       <Activity name="SHAIK NAGUR BASHA" textColor="tomato" />
-//     </div>
-// );
-// }
-//for Amazon product problem of folder Practice
-// import ProductTab from "./Practice/ProductTab";
-// function App() {
-//   let styles={textAlign:"center"};
-//   return( 
-//     <div>
-//       <h4 style={styles}>BlockBuster Deals I Shop Now!</h4>
-//       <ProductTab/>
-//     </div>
-// ); 
-// }
-// export default App;
+/**
+ * Main App Component
+ * Orchestrates the entire weather application with state management
+ * Handles API calls, error states, and UI flow
+ */
 
-// import { Button } from "@mui/material";
-// import { useState } from "react";
+import React, { useState, useCallback } from "react";
+import SearchBox from "./components/SearchBox";
+import WeatherDisplay from "./components/WeatherDisplay";
+import LoadingState from "./components/LoadingState";
+import ErrorState from "./components/ErrorState";
+import WelcomeState from "./components/WelcomeState";
+import { fetchWeatherByCity } from "./utils/weatherAPI";
+import "./styles/App.css";
 
-//EventHandler
-// import EventHandler from "./EventHandler";
-// function App(){
-//   return(
-//     <EventHandler name="Sajid"/>
-//   );
-// }
-// export default App;
+function App() {
+  const [weather, setWeather] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-//State
-// import State from "./State.jsx";
-// function App(){
-//   return(
-//     <State/>
-//   );
-// }
-// export default App;
+  /**
+   * Handles weather search with error handling and state management
+   * @param {string} city - City name to search for
+   */
+  const handleSearch = useCallback(async (city) => {
+    setIsLoading(true);
+    setError("");
 
-//LikeButton
-// import LikeButton from "./LikeButton.jsx";
-// function App(){
-//   return(
-//     <div>
-//       <LikeButton/>
-//     </div>
-//   );
-// }
-// export default App;
+    try {
+      const weatherData = await fetchWeatherByCity(city);
+      setWeather(weatherData);
+      setError("");
+    } catch (err) {
+      setError(err.message || "Failed to fetch weather data");
+      setWeather(null);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
-//Todo List 
-// import Todo from "./Todo.jsx";
-// function App(){
-//   return(
-//     <div>
-//       <Todo/>
-//     </div>
-//   ); 
-// }
-// export default App;
+  /**
+   * Handles retry action when error occurs
+   */
+  const handleRetry = useCallback(() => {
+    setError("");
+    setWeather(null);
+  }, []);
 
-//Ludo Board for state and objects
-// import Ludoboard from "./LudoboardUsindObject.jsx";
-// function App(){
-//   return(
-//     <>
-    
-//     <div style={{display:"flex"}}>
-//     <h1> LudoBoard </h1>
-//     <Ludoboard/>
-    
-//     </div>
-//     </>
-    
-//   );
-// }
-// export default App;
+  return (
+    <div className="app">
+      {/* Background gradient */}
+      <div className="app-background"></div>
 
+      {/* Main content */}
+      <div className="app-container">
+        {/* Header */}
+        <header className="app-header">
+          <h1 className="app-title">
+            <span className="title-emoji">🌤️</span>
+            Weather App
+          </h1>
+          <p className="app-subtitle">Get real-time weather for any city</p>
+        </header>
 
+        {/* Search Section */}
+        <SearchBox onSearch={handleSearch} isLoading={isLoading} />
 
-//Routing 
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-// import Home from "./Routing/Home";
-// import About from "./Routing/About";
-// import Contact from "./Routing/Contact";
-// import Navbar from "./Routing/Navbar";
-// import Navigate from "./Routing/Navigate";
-// const App = () => {
-//   return (
-//     <>     
+        {/* Content Section - Shows based on current state */}
+        <main className="app-main">
+          {isLoading && <LoadingState />}
 
-//     <Router>
-//        <Navbar/>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/about" element={<About />} />
-//         <Route path="/contact" element={<Contact />} />
-//         <Route path="/nav" element={<Navigate />} />
+          {error && !isLoading && <ErrorState error={error} onRetry={handleRetry} />}
 
-//       </Routes>
-//     </Router></>
-//   );
-// };
+          {weather && !error && <WeatherDisplay weather={weather} />}
 
-// export default App;
+          {!weather && !error && !isLoading && <WelcomeState />}
+        </main>
 
-
-// //Lottery Game for random num gen 
-// import Lottery from "./Lottery";
-// function App(){
-//   return(
-//     <div style={{display:'flex',justifyContent:"center"}}>
-//       <Lottery/>       
-//     </div>
-//   ); 
-// }
-// export default App;
-
-
-//Fuctions as props
-// import Ticket from "./Routing/LotteryGame/Ticket";
-// const App=()=>{
-//   let isWinned=(ticket)=>{
-//     return ticket[0]===0 ;
-//   }
-//   return(
-//     <Ticket n={3} isWinned={isWinned} />
-//   );
-// }
-// export default App;
-
-//forms 
-// import { useState } from "react";
-// const App=()=>{
-//   let [inputVal,setInputVal]=useState("Sajid");
-//   const [display, setV] = useState("");  return(
-//     <>
-//     <div style={{margin:"3px",display:"flex",justifyContent:"space-around",width:"270px"}}>
-//     <label htmlFor="name">Name</label>
-//     <input type="text" id="name" style={{backgroundColor:"rgb(55, 63, 72)",color:"white",width:"200px",height:"29px" ,border:"0px"}} value={inputVal} onChange={(e)=>setInputVal(e.target.value)}/>
-//     <input  style={{backgroundColor:"rgb(55, 63, 72)",color:"white",height:"31px"}}type="button" value={"Button"} onClick={()=>setV(inputVal)}></input>
-//     </div>
-//     {display}
-    
-    
-//     </>
-//   );
-// }
-// export default App;
- 
-
-// Multiple inputs form
-// import MultipleInputsObject from "./Form/MultipleInputsObject";
-//  function App(){
-//   return(
-//     < MultipleInputsObject/>
-//   );
-
-//  } 
-//  export default App;
-
-
-//useEffect()
-// import UseEffect from "./UseEffect";
-// function App(){
-//   return(
-//     <UseEffect/>
-//   );
-// }
-// // export default App;
-
-//useEffect() with API data Fetch using JockerAPI
-// import JockerAPI from "./JockerAPI";
-// function App(){
-//   return(
-//     <JockerAPI/>
-//   );
-// }
-// export default App;
-
-    // Mini Project called Weather App by search name
-import WeatherApp from "./miniproject/WeatherApp";
-function App(){
-  return(
-    <div style={{background:"linear-gradient(to top,#ffd952,#bdc4de)",width:"100vw",height:"99vh",marginTop:'-20px',marginBottom:"-50px"}}>
-    <WeatherApp/>
+        {/* Footer */}
+        <footer className="app-footer">
+          <p>
+            Built with React • Powered by{" "}
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              OpenWeatherMap API
+            </a>
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }
+
 export default App;

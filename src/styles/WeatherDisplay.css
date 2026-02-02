@@ -1,0 +1,269 @@
+/**
+ * WeatherDisplay Component Styles
+ * Comprehensive styling for weather information card
+ */
+
+.weather-display {
+  width: 100%;
+  max-width: 600px;
+  animation: slideUp var(--transition-slow);
+}
+
+.weather-card {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+/* Header Section */
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-light);
+}
+
+.weather-location {
+  text-align: left;
+}
+
+.location-name {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.location-country {
+  font-size: 0.9rem;
+  color: var(--color-border);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+}
+
+.weather-emoji-large {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+/* Temperature Section */
+.temperature-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.main-temperature {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.temperature-value {
+  font-size: 4.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.temperature-unit {
+  font-size: 2rem;
+  color: var(--color-secondary);
+  font-weight: var(--font-weight-semibold);
+  margin-top: var(--spacing-xs);
+}
+
+.feels-like {
+  font-size: 1.1rem;
+  color: var(--color-border);
+  font-weight: var(--font-weight-medium);
+}
+
+.feels-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.weather-condition {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* Weather Details Grid */
+.weather-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.detail-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background-color: var(--color-light);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.detail-card:hover {
+  background-color: #e8eef7;
+  transform: translateY(-2px);
+}
+
+.detail-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  color: var(--color-border);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+/* Footer */
+.weather-footer {
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-light);
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--color-border);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .weather-card {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    gap: var(--spacing-lg);
+  }
+
+  .weather-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+
+  .weather-location {
+    text-align: center;
+  }
+
+  .location-name {
+    font-size: 1.5rem;
+  }
+
+  .temperature-value {
+    font-size: 3.5rem;
+  }
+
+  .temperature-unit {
+    font-size: 1.5rem;
+  }
+
+  .weather-condition {
+    font-size: 1.1rem;
+  }
+
+  .weather-details-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .detail-card {
+    padding: var(--spacing-md);
+  }
+
+  .detail-icon {
+    font-size: 1.5rem;
+  }
+
+  .detail-value {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-card {
+    padding: var(--spacing-lg) var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+
+  .weather-emoji-large {
+    font-size: 3rem;
+  }
+
+  .location-name {
+    font-size: 1.3rem;
+  }
+
+  .temperature-value {
+    font-size: 2.5rem;
+  }
+
+  .temperature-unit {
+    font-size: 1.2rem;
+  }
+
+  .weather-condition {
+    font-size: 1rem;
+  }
+
+  .weather-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-card {
+    flex-direction: row;
+    padding: var(--spacing-md);
+  }
+
+  .detail-value {
+    font-size: 1rem;
+  }
+}
+
+/* Custom radius for weather card */
+.weather-card {
+  --radius-2xl: 2rem;
+}
+
+@media (max-width: 480px) {
+  .weather-card {
+    --radius-2xl: 1.5rem;
+  }
+}
