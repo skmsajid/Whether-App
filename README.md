@@ -6,9 +6,9 @@
 
 ## 🚀 Overview
 
-The **Weather App** is a lightweight React application that provides real-time weather information for cities around the world using the **OpenWeatherMap API**.
+The **Weather App** is a lightweight React application that delivers real-time weather information for cities around the world using the **OpenWeatherMap API**.
 
-Designed with simplicity, performance, and usability in mind, the application presents essential weather details through a clean, responsive interface that works seamlessly across mobile, tablet, and desktop devices.
+Built with simplicity, performance, and usability in mind, the app presents essential weather details through a clean, responsive interface that works seamlessly across mobile, tablet, and desktop devices.
 
 ---
 
@@ -74,7 +74,7 @@ cd Weather-App
 npm install
 ```
 
-### 3. Configure the environment
+### 3. Configure environment variables
 
 Create a `.env.local` file in the project root and add your OpenWeatherMap API key:
 
